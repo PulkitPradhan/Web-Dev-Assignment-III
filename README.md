@@ -3,7 +3,8 @@
 A **neon-themed** Student Scoreboard built with React and Vite for the **Web Dev II – Unit 3** lab.  
 It lets you manage students, update scores in real-time, and view pass/fail status with a cyber-style UI.
 
-<img width="1919" height="992" alt="image" src="https://github.com/user-attachments/assets/ce072f45-815c-4f80-be96-5d67821da120" />
+<img width="1919" height="966" alt="image" src="https://github.com/user-attachments/assets/9cded085-c39b-4323-ac86-f10742696601" />
+
 
 
 ---
