@@ -1,60 +1,80 @@
-import { useState, useCallback } from 'react';
-import './App.css';
-import Header from './components/Header';
-import AddStudentForm from './components/AddStudentForm';
-import StudentTable from './components/StudentTable';
+import { useState } from "react";
+import Header from "./Components/Header.jsx";
+import AddStudentForm from "./Components/AddStudentForm.jsx";
+import StudentTable from "./Components/StudentTable.jsx";
+
+const initialStudents = [
+  { id: 1, name: "Chirag Chanchal", score: 100 },
+  { id: 2, name: "Divyant Poddar", score: 72 },
+  { id: 3, name: "Anurag Thakur", score: 5 },
+  { id: 4, name: "Krithya Shrivastav", score: 100 },
+  { id: 5, name: "Aditya Diwakar", score: 80},
+];
 
 function App() {
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState(initialStudents);
 
-  const addStudent = useCallback((newStudent) => {
+  const handleAddStudent = (name, score) => {
+    const trimName = name.trim();
+    if (!trimName) return;
+    const numericScore = Number(score);
+    if (Number.isNaN(numericScore)) return;
+
+    const newStudent = {
+      id: Date.now(),
+      name: trimName,
+      score: numericScore,
+    };
+
     setStudents((prev) => [...prev, newStudent]);
-  }, []);
+  };
 
-  const updateStudentScore = useCallback((id, score) => {
-    if (score === '' || score === null) return;
-    const numericScore = parseFloat(score);
-    if (isNaN(numericScore)) return;
+  const handleUpdateScore = (id, newScore) => {
+    const numericScore = Number(newScore);
+    if (Number.isNaN(numericScore)) return;
     setStudents((prev) =>
-      prev.map((student) =>
-        student.id === id ? { ...student, score: numericScore } : student
-      )
+      prev.map((s) => (s.id === id ? { ...s, score: numericScore } : s))
     );
-  }, []);
-
-  const deleteStudent = useCallback((id) => {
-    setStudents((prev) => prev.filter((student) => student.id !== id));
-  }, []);
+  };
 
   const totalStudents = students.length;
   const passCount = students.filter((s) => s.score >= 40).length;
-  const failCount = totalStudents - passCount;
+  const avgScore =
+    totalStudents === 0
+      ? 0
+      : Math.round(
+          students.reduce((sum, s) => sum + s.score, 0) / totalStudents
+        );
 
   return (
-    <div className="app-container">
+    <div className="container">
       <Header />
-      <AddStudentForm onAddStudent={addStudent} />
-      <StudentTable
-        students={students}
-        onUpdateScore={updateStudentScore}
-        onDeleteStudent={deleteStudent}
-      />
-      {totalStudents > 0 && (
-        <div className="stats-summary">
-          <div className="stat-item">
-            <div className="stat-value">{totalStudents}</div>
-            <div className="stat-label">Total</div>
-          </div>
-          <div className="stat-item pass-stat">
-            <div className="stat-value">{passCount}</div>
-            <div className="stat-label">Passing</div>
-          </div>
-          <div className="stat-item fail-stat">
-            <div className="stat-value">{failCount}</div>
-            <div className="stat-label">Failing</div>
-          </div>
+
+      {}
+      <div className="stats-strip">
+        <div className="stat-cell">
+          <div className="stat-label">Total Students</div>
+          <div className="stat-value">{totalStudents}</div>
         </div>
-      )}
+        <div className="stat-cell">
+          <div className="stat-label">Passed</div>
+          <div className="stat-value">{passCount}</div>
+        </div>
+        <div className="stat-cell">
+          <div className="stat-label">Average Score</div>
+          <div className="stat-value">{avgScore}</div>
+        </div>
+      </div>
+
+      {}
+      <AddStudentForm onAddStudent={handleAddStudent} />
+
+      {}
+      <StudentTable students={students} onUpdateScore={handleUpdateScore} />
+
+      <footer className="footer">
+        STUDENT SCOREBOARD • REACT • KRMU LAB
+      </footer>
     </div>
   );
 }

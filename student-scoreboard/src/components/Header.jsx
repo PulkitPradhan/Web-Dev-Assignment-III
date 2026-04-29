@@ -1,8 +1,11 @@
 function Header() {
   return (
     <header className="header">
-      <h1>Student Scoreboard</h1>
-      <p>Track and manage student performance</p>
+      <div className="header-eyebrow">Academic TERMINAL</div>
+      <h1 className="title">
+        Student <span className="title-accent">Scoreboard</span>
+      </h1>
+      <div className="header-rule" />
     </header>
   );
 }
