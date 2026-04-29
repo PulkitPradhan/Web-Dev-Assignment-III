@@ -4,11 +4,11 @@ import AddStudentForm from "./Components/AddStudentForm.jsx";
 import StudentTable from "./Components/StudentTable.jsx";
 
 const initialStudents = [
-  { id: 1, name: "Chirag Chanchal", score: 100 },
-  { id: 2, name: "Divyant Poddar", score: 72 },
-  { id: 3, name: "Anurag Thakur", score: 5 },
-  { id: 4, name: "Krithya Shrivastav", score: 100 },
-  { id: 5, name: "Aditya Diwakar", score: 80},
+  { id: 1, name: "CHIRAG CHANCHAL", score: 100 },
+  { id: 2, name: "VINAYAK VASHISTH", score: 72 },
+  { id: 3, name: "Arnav Kapil", score: 100 },
+  { id: 5, name: "KUNAL KASHYAP", score: 35},
+  { id: 6, name: "Aditya Diwakar", score: 85},
 ];
 
 function App() {
